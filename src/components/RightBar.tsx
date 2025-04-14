@@ -1,8 +1,5 @@
-
 function RightBar() {
-  return (
-    <div>RightBar</div>
-  )
+  return <div>RightBar</div>;
 }
 
-export default RightBar
+export default RightBar;
