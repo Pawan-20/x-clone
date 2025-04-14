@@ -13,7 +13,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "bun run format"
+      "./scripts/lint-error.sh"
     ]
   },
   "dependencies": {

@@ -1,12 +1,25 @@
-# Regex: starts with [label]: or [label] :
-PATTERN='^\[[^\]]+\]([ ]*:[ ]*|[ ]*:[^ ]*).+'
+#!/bin/sh
 
-commit_msg_file=$1
-commit_msg=$(cat "$commit_msg_file")
+# Get the first line of the commit message
+COMMIT_MSG_FILE=$1
+FIRST_LINE=$(head -n1 "$COMMIT_MSG_FILE")
 
-if ! echo "$commit_msg" | grep -Eq "$PATTERN"; then
-  echo "\n❌ Invalid commit message format."
+# Trim whitespace
+TRIMMED=$(echo "$FIRST_LINE" | xargs)
+
+# Pattern for commit message: [type]: message
+PATTERN='\[[-a-zA-Z0-9_]+\][ ]*:[ ]*[^ ].*'
+
+echo "Checking commit message: '$TRIMMED'"
+
+# Check if the commit message matches the pattern
+if ! echo "$TRIMMED" | grep -E "$PATTERN" > /dev/null; then
+  echo
+  echo "❌ Invalid commit message format."
   echo "✅ Expected format: [label]: your message"
   echo "💡 Example: [fix]: fix crash on load"
   exit 1
 fi
+
+# Success
+echo "✅ Commit message format valid!"

@@ -1,1 +1,4 @@
+#!/bin/sh
+
+# Just run lint-staged, error handling is in the lint-staged config
 npx lint-staged
