@@ -53,6 +53,11 @@ const config = [
           jsx: true,
         },
       },
+      globals: {
+        console: "readonly",
+        window: "readonly",
+        document: "readonly",
+      },
     },
     rules: {
       // TypeScript rules
