@@ -1,4 +1,6 @@
+import RightBar from "@/components/RightBar";
 import "./globals.css";
+import LeftBar from "@/components/LeftBar";
 
 export default function RootLayout({
   children,
@@ -7,7 +9,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="">
+          <div>
+            <LeftBar></LeftBar>
+          </div>
+          <div>HomePage</div>
+          <div>
+            <RightBar />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
