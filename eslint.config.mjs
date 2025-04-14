@@ -15,7 +15,8 @@ import tsParser from "@typescript-eslint/parser";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const compat = new FlatCompat({
+// Create compat layer, but we're not using it directly in this config
+new FlatCompat({
   baseDirectory: __dirname,
 });
 
@@ -33,12 +34,13 @@ const config = [
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       "@next/next": nextPlugin,
-      "react": reactPlugin,
+      react: reactPlugin,
       "react-hooks": reactHooksPlugin,
       "jsx-a11y": jsxA11yPlugin,
-      "import": importPlugin,
-      "prettier": prettierPlugin,
+      import: importPlugin,
+      prettier: prettierPlugin,
       "@typescript-eslint": tseslint,
+      "simple-import-sort": (await import("eslint-plugin-simple-import-sort")).default,
     },
     languageOptions: {
       parser: tsParser,
@@ -69,7 +71,10 @@ const config = [
 
       // Prettier rules
       "prettier/prettier": "error",
-      
+
+      //Sort auto imports
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
     },
   },
 ];
